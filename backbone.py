@@ -48,7 +48,7 @@ class DeeperCNN(nn.Module):
         )
 
         self.block3 = nn.Sequential(
-            nn.Conv2d(128, 256, kernel_size=3, padding=1),
+            nn.Conv2d(256, 256, kernel_size=3, padding=1),
             nn.SiLU(),
             nn.BatchNorm2d(256)
         )
@@ -71,5 +71,5 @@ class DeeperCNN(nn.Module):
         x = self.residual_block_2(x)
         x = x + res
         x = self.block3(x)
-
-        return self.classifier(x)
+        features = self.proj(x)
+        return features
